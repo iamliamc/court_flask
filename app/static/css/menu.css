@@ -1,0 +1,123 @@
+﻿.menu 
+{
+	width:790px; 
+	height:32px; 
+	position:relative; 
+	text-align:center; 
+	margin-left:0px; 
+	margin-bottom:15px;
+	margin-top:0px;	
+	z-index:100;
+	font-family:Verdana, Arial, Helvetica, Sans-Serif;
+	text-decoration:none;
+	font-size: 10px;
+	text-transform:uppercase;
+	top:0px;
+}
+
+.menu ul h1
+{
+    font-size:1em;
+}
+
+/* hack to correct IE5.5 faulty box model */
+* html .menu 
+{
+	width:746px; 
+	w\idth:745px;
+	
+}
+
+/* remove all the bullets, borders and padding from the default list styling */
+.menu ul 
+{
+	padding:0;
+	margin:0;
+	margin-top:0px;
+	list-style-type:none;
+}
+
+#selected
+{
+    background:#D6D9DF;
+}
+
+/* float the list to make it horizontal and a relative positon so that you can control the dropdown menu positon */
+.menu li 
+{
+	float:left;
+	width:155px;
+	padding-left:1px;
+    font-size:1.13em;
+	padding-right:1px;
+	position:relative;
+    padding:15px;
+     
+}
+
+/* style the links for the top level */
+.menu a, .menu a:visited 
+{
+    padding-top:10px;
+	display:block;
+	text-decoration:none;
+	/*color:#0274be; */
+	//color:#0066CC;
+	color:#999999;
+	width:220px;
+	height:32px;
+	font-weight:bold;
+	background-image: url(bg.jpg);
+    border-radius:30px;
+    border: 1px solid #999;
+    box-shadow: 0px 40px 30px -30px #888;
+    background:#F6F9FF;
+    padding:15px;
+}
+
+.menu a p
+{
+	bottom:0;
+	width:160px;
+	left:0;
+    font-size:1.2em;
+	cursor:pointer;
+    vertical-align:top;
+    margin-top:5px;
+}
+
+/* a hack so that IE5.5 faulty box model is corrected */
+* html .menu a, * html .menu a:visited 
+{
+	width:160px; 
+	w\idth:160px;
+}
+
+/* style the table so that it takes no ppart in the layout - required for IE to work */
+.menu table 
+{
+	position:absolute; 
+	top:0; 
+	left:0; 
+	border-collapse:collapse;
+}
+
+ 
+/* style the top level hover */
+.menu a:hover, .menu ul ul a:hover, .menu :hover > a, .menu ul ul :hover > a, .menu ul ul ul a:visited:hover, #selected:hover
+{
+	background:#005599;
+	color:#DDDDDD;
+    opacity:1;
+}
+
+/* make the second level visible when hover on first level list OR link */
+.menu ul li:hover ul,.menu ul a:hover ul, .menu ul :hover ul :hover ul
+{
+	visibility:visible;
+}
+/* keep the third level hidden when you hover on first level list OR link */
+.menu ul :hover ul ul
+{
+	visibility:hidden;
+}

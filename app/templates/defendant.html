@@ -1,0 +1,45 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<h1>{{ defendant.Name_Full }}</h1>
+
+<div id="jqxgrid" style="margin-top:30px;" />
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+    var rows = '{{charges|safe}}';
+    var json = '{ "columns": [{"text" : "Offense", "datafield" : "Offense", "width" : "600"},{"text": "Offense Date", "datafield": "Offense_Date"}, {"text": "Disposition", "datafield": "Disposition"},{"text": "Disposition Date", "datafield": "Disposition_Date", "width" : "150"}]}';
+    var columns = $.parseJSON(json).columns;
+    var source =
+     {
+         datatype: "json",
+         id: 'id',
+         localdata: rows
+     };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+    $("#jqxgrid").jqxGrid(
+    {
+        width: 1200,
+        autoheight: true,
+        theme: 'energyblue',
+        altrows: true,
+        source: dataAdapter,
+        columns: columns
+    });
+    });
+
+</script>
+
+{% endblock %}
+
+
+'Offense' : c.Offense,
+        'Offense_Date' : c.Offense_Date,
+        'Disposition' : c.Disposition,
+        'Disposition_Date' : c.Disposition_Date

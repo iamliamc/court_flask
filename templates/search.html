@@ -1,0 +1,42 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+
+<form action="Results" method="POST">
+{{form.hidden_tag()}}
+{{form.category(id="offensesInput")}}
+{{form.page(id="page", style="visibility:hidden;")}}
+<input type="submit" text="submit" />
+<script type="text/javascript">
+String.prototype.allReplace = function(obj) {
+    var retStr = this;
+    for (var x in obj) {
+        retStr = retStr.replace(new RegExp(x, 'g'), obj[x]);
+    }
+    return retStr;
+};
+var offenses = "{{offenses}}";
+var offenseList = offenses.split(",");
+var i;
+for(i = 0; i < offenseList.length; i++)
+{
+    offenseList[i] = offenseList[i].allReplace({'%2' : ','});
+}
+
+$("#offensesInput").autocomplete({
+    source:offenseList,
+    select: function(event, ui)
+    {
+        $("#offensesInput").val(ui.item.value);
+    }
+})
+
+$('#page').val(1);
+
+</script>
+{% endblock %}

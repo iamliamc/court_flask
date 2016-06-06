@@ -1,0 +1,73 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+<div id="jqxgrid"></div>
+
+<form action="Results" method="POST">
+{{form.hidden_tag()}}
+{{form.category(id="offensesInput", style="visibility:hidden;")}}
+{{form.page(id="page", style="visibility:hidden;")}}
+{% if Defendants.has_prev %}
+    <input type="submit" value="Previous" onclick="javascript:Previous();">
+    {% else %}
+    Previous
+    {% endif %} |
+{% if Defendants.has_next %} <input type="submit" value="Next" onclick="javascript:Next();">{% else %}Next{% endif %}
+
+</form>
+<script type="text/javascript">
+
+$(document).ready(function () {
+    var rows = '{{defendants|safe}}';
+    var json = '{ "columns": [{"text" : "ID", "datafield" : "defendant_id", "hidden": "true"},{"text": "Name", "datafield": "Name_Full"}, {"text": "Sex", "datafield": "Sex"}]}';
+    var columns = $.parseJSON(json).columns;
+    var source =
+     {
+         datatype: "json",
+         id: 'id',
+         localdata: rows
+     };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+    $("#jqxgrid").jqxGrid(
+    {
+        width: 800,
+        autoheight: true,
+        theme: 'energyblue',
+        altrows: true,
+        source: dataAdapter,
+        columns: columns
+    });
+    });
+
+$('#jqxgrid').on('rowselect', function (event) {
+
+    // event arguments.
+    var args = event.args;
+    // row's bound index.
+    var rowBoundIndex = args.rowindex;
+    // row's data. The row's data object or null(when all rows are being selected or unselected with a single action). If you have a datafield called "firstName", to access the row's firstName, use var firstName = rowData.firstName;
+    var rowData = args.row;
+
+    var defendantID = rowData.defendant_id;
+    window.location = "Person/" + defendantID;
+ });
+
+$('#offensesInput').val('{{category}}');
+var page = {{page}};
+function Next()
+{
+    $('#page').val(page+1);
+}
+function Previous()
+{
+    $('#page').val(page-1);
+}
+
+</script>
+
+{% endblock %}

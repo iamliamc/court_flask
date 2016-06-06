@@ -1,0 +1,16 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ user.nickname }}!</h1>
+    {% for post in posts %}
+    <p>
+      {{ post.author.nickname }} says: <b>{{ post.body }}</b>
+    </p>
+    {% endfor %}
+    {% for defendant in defendants %}
+    <p>
+        {{defendant.Name_Full}}
+    </p>
+    {% endfor %}
+{% endblock %}

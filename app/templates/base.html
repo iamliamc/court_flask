@@ -1,0 +1,43 @@
+<html>
+  <head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/static/Javascript/jqwidgets/styles/jqx.base.css" type="text/css" />
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxbuttons.js" ></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxscrollbar.js" ></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxmenu.js" ></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxgrid.js" ></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxgrid.selection.js" ></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxgrid.columnsresize.js" ></script>
+<script type="text/javascript" src="/static/Javascript/jqwidgets/jqxdata.js" ></script>
+<link href="/static/css/menu.css" rel="stylesheet" type="text/css" />
+    {% if title %}
+    <title>{{ title }} - microblog</title>
+    {% else %}
+    <title>microblog</title>
+    {% endif %}
+  </head>
+  <body>
+    <div class="menu">
+        <ul>
+            <li><a href="/Search"><p>Search</p></a></li>
+        </ul>
+    </div>
+
+<div style="clear:both; height:50px; width:1px;"> </div>
+
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </body>
+</html>
